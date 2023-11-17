@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL.h>
+#include "Engine/map.h"
 
 
 #define FPS 60
@@ -14,6 +15,8 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Event event;
+
+	Map map;
 
 	bool running = true;
 	Uint64 lastFrame = SDL_GetTicks64();
@@ -32,7 +35,8 @@ public:
 	Game() :
 		window(SDL_CreateWindow("Raycaster", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN)),
 		renderer(SDL_CreateRenderer(window, -1, 0)),
-		event(SDL_Event())
+		event(SDL_Event()),
+		map(Map(renderer))
 	{
 		// SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
@@ -50,6 +54,8 @@ public:
 	}
 
 	void draw() {
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderClear(renderer);
 
 		SDL_RenderPresent(renderer);
 	}
