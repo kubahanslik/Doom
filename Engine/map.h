@@ -9,8 +9,8 @@
 
 struct Wall {
 	SDL_Texture* texture;
-	int width;
-	int height;
+	int texture_width;
+	int texture_height;
 	int x;
 	int y;
 };
@@ -38,4 +38,7 @@ private:
 	void loadWalls();
 
 };
+
+#include "engine.h"
+
 #endif // !MAP

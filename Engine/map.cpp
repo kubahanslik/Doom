@@ -22,10 +22,29 @@ Map::Map(SDL_Renderer* renderer) :
 
 Map::~Map() {}
 
-void Map::draw() {}
+void Map::draw() {
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_Rect rect;
+
+	int ratio_x = WINDOW_WIDTH / map_length_x;
+	int ratio_y = WINDOW_HEIGHT / map_length_y;
+
+	for (Wall& wall : walls) {
+		rect.x = wall.x * ratio_x;
+		rect.y = wall.y * ratio_y;
+		rect.w = ratio_x;
+		rect.h = ratio_y;
+
+		SDL_RenderDrawRect(renderer, &rect);
+	}
+}
 
 bool Map::isInWall(double pos_x, double pos_y) {
-	
+	for (Wall& wall : walls) {
+		if (wall.x == (int)pos_x && wall.y == (int)pos_y)
+			return true;
+	}
+
 	return false;
 }
 
@@ -42,8 +61,8 @@ void Map::initWall(int x, int y, Wall& wall) {
 	
 	wall.x = x;
 	wall.y = y;
-	wall.width = surface->w;
-	wall.height = surface->h;
+	wall.texture_width = surface->w;
+	wall.texture_height = surface->h;
 	wall.texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 	SDL_FreeSurface(surface);

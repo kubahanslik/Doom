@@ -1,38 +1,7 @@
-#include <iostream>
-#include <SDL.h>
-#include "Engine/map.h"
+#include "Engine/engine.h"
 
 
-#define FPS 60
-
-const int DELTA_TIME = 1000 / FPS;
-const int WINDOW_WIDTH = 1600;
-const int WINDOW_HEIGHT = 900;
-
-
-class Game {
-private:
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-	SDL_Event event;
-
-	Map map;
-
-	bool running = true;
-	Uint64 lastFrame = SDL_GetTicks64();
-
-private:
-	void controlFPS() {
-		Uint64 delta = SDL_GetTicks64() - lastFrame;
-		if (delta < DELTA_TIME) {
-			SDL_Delay(DELTA_TIME - delta);
-		}
-		lastFrame = SDL_GetTicks64();
-	}
-
-
-public:
-	Game() :
+Engine::Engine() :
 		window(SDL_CreateWindow("Raycaster", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN)),
 		renderer(SDL_CreateRenderer(window, -1, 0)),
 		event(SDL_Event()),
@@ -40,12 +9,12 @@ public:
 	{
 		// SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
-	~Game() {
+	Engine::~Engine() {
 		SDL_DestroyWindow(window);
 		SDL_DestroyRenderer(renderer);
 	}
 
-	void handleEvents() {
+	void Engine::handleEvents() {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT)
 				running = false;
@@ -53,24 +22,29 @@ public:
 		}
 	}
 
-	void draw() {
+	void Engine::draw() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
+
+		map.draw();
 
 		SDL_RenderPresent(renderer);
 	}
 
-	void update() {
+	void Engine::update() {
 
 		controlFPS();
 	}
 
-	bool isRunning() { return running; }
-	const int& getDeltaTime() { return DELTA_TIME; }
-	const int& getWindowWidth() { return WINDOW_WIDTH; }
-	const int& getWindowHeight() { return WINDOW_HEIGHT; }
-};
+	void Engine::controlFPS() {
+		Uint64 delta = SDL_GetTicks64() - lastFrame;
+		if (delta < DELTA_TIME) {
+			SDL_Delay(DELTA_TIME - delta);
+		}
+		lastFrame = SDL_GetTicks64();
+	}
 
+	bool Engine::isRunning() { return running; }
 
 
 int main(int argc, char* args[]) {
@@ -81,12 +55,12 @@ int main(int argc, char* args[]) {
 		std::cout << "[*] Init successful\n";
 	}
 
-	Game game;
+	Engine engine;
 
-	while (game.isRunning()) {
-		game.handleEvents();
-		game.update();
-		game.draw();
+	while (engine.isRunning()) {
+		engine.handleEvents();
+		engine.update();
+		engine.draw();
 	}
 
 	SDL_Quit();
