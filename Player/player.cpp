@@ -8,7 +8,7 @@ Player::Player(SDL_Renderer* rend) :
 	mouse_rel_x(0),
 	mouse_rel_y(0)
 {
-	
+
 }
 
 Player::~Player() {}
@@ -26,5 +26,5 @@ void Player::update() {
 }
 
 void Player::draw() {
-	
+
 }

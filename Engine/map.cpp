@@ -15,7 +15,9 @@ int world_map[9][16] = {
 Map::Map(SDL_Renderer* renderer) :
 	renderer(renderer),
 	map_length_x(sizeof(world_map[0]) / sizeof(int)),
-	map_length_y(sizeof(world_map) / sizeof(int) / map_length_x)
+	map_length_y(sizeof(world_map) / sizeof(int) / map_length_x),
+	ratio_x(Engine::WINDOW_WIDTH / map_length_x),
+	ratio_y(Engine::WINDOW_HEIGHT / map_length_y)
 {
 	loadWalls();
 }
@@ -25,9 +27,6 @@ Map::~Map() {}
 void Map::draw() {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_Rect rect;
-
-	int ratio_x = WINDOW_WIDTH / map_length_x;
-	int ratio_y = WINDOW_HEIGHT / map_length_y;
 
 	for (Wall& wall : walls) {
 		rect.x = wall.x * ratio_x;

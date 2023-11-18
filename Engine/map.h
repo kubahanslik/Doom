@@ -25,6 +25,9 @@ private:
 	int map_length_x;
 	int map_length_y;
 
+	int ratio_x;
+	int ratio_y;
+
 public:
 	Map(SDL_Renderer* rend);
 	~Map();

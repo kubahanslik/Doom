@@ -4,8 +4,8 @@
 Engine::Engine() :
 	window(SDL_CreateWindow("Raycaster", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN)),
 	renderer(SDL_CreateRenderer(window, -1, 0)),
-	event(SDL_Event()),
-	map(Map(renderer))
+	event(),
+	map(renderer)
 {
 	// SDL_SetRelativeMouseMode(SDL_TRUE);
 }
@@ -25,8 +25,6 @@ void Engine::handleEvents() {
 void Engine::draw() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
-
-	map.draw();
 
 	SDL_RenderPresent(renderer);
 }
