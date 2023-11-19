@@ -2,12 +2,14 @@
 #define PLAYER
 
 #include <SDL.h>
-#include <vector>
+#include <cmath>
+#include "../Engine/map.h"
 
 
 class Player {
 private:
 	SDL_Renderer* renderer;
+	Map& map;
 
 public:
 	static const int SIZE = 30;
@@ -26,11 +28,13 @@ private:
 	int getTileY();
 
 public:
-	Player(SDL_Renderer* rend);
+	Player(SDL_Renderer* rend, Map& map);
 	~Player();
 
 	void update();
 	void draw();
 };
+
+#include "../Engine/engine.h"
 
 #endif // !PLAYER
