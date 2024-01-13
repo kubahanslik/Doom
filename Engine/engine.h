@@ -19,9 +19,10 @@ class Engine {
 
 	bool running = true;
 	Uint64 lastFrame = SDL_GetTicks64();
+	Uint64 deltaTime = TARGET_DELTA_TIME;
 
 public:
-	static const int DELTA_TIME = 1000 / FPS;
+	static const int TARGET_DELTA_TIME = 1000 / FPS;
 	static const int WINDOW_WIDTH = 1600;
 	static const int WINDOW_HEIGHT = 900;
 

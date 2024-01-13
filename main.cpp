@@ -35,9 +35,10 @@ void Engine::update() {
 }
 
 void Engine::controlFPS() {
-	Uint64 delta = SDL_GetTicks64() - lastFrame;
-	if (delta < DELTA_TIME) {
-		SDL_Delay(DELTA_TIME - delta);
+	deltaTime = SDL_GetTicks64() - lastFrame;
+	if (deltaTime < TARGET_DELTA_TIME) {
+		SDL_Delay(TARGET_DELTA_TIME - deltaTime);
+		deltaTime = TARGET_DELTA_TIME;
 	}
 	lastFrame = SDL_GetTicks64();
 }

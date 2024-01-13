@@ -10,6 +10,7 @@ class Player {
 private:
 	SDL_Renderer* renderer;
 	Map& map;
+	Uint64& deltaTime;
 
 public:
 	static const int SIZE = 30;
@@ -28,7 +29,7 @@ private:
 	int getTileY();
 
 public:
-	Player(SDL_Renderer* rend, Map& map);
+	Player(SDL_Renderer* rend, Map& map, Uint64& deltaTime);
 	~Player();
 
 	void update();

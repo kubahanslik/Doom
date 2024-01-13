@@ -1,8 +1,9 @@
 #include "player.h"
 
-Player::Player(SDL_Renderer* rend, Map& map) :
+Player::Player(SDL_Renderer* rend, Map& map, Uint64& deltaTime) :
 	renderer(rend),
 	map(map),
+	deltaTime(deltaTime),
 	pos_x(1.5),
 	pos_y(4.5),
 	angle(0),
@@ -26,13 +27,13 @@ void Player::update() {
 	const Uint8* keys = SDL_GetKeyboardState(nullptr);
 	SDL_GetRelativeMouseState(&mouse_rel_x, &mouse_rel_y);
 
-	angle -= mouse_rel_x * MOUSE_SENSITIVITY * Engine::DELTA_TIME;
+	angle -= mouse_rel_x * MOUSE_SENSITIVITY * deltaTime;
 
 	double cos_a = std::cos(angle);
 	double sin_a = std::sin(angle);
 
-	double cos_speed = cos_a * SPEED * Engine::DELTA_TIME;
-	double sin_speed = sin_a * SPEED * Engine::DELTA_TIME;
+	double cos_speed = cos_a * SPEED * deltaTime;
+	double sin_speed = sin_a * SPEED * deltaTime;
 
 	double dx = 0;
 	double dy = 0;
