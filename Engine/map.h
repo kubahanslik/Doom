@@ -6,8 +6,8 @@
 #include <SDL_image.h>
 #include <vector>
 
-extern int WINDOW_WIDTH;
-extern int WINDOW_HEIGHT;
+extern const int WINDOW_WIDTH;
+extern const int WINDOW_HEIGHT;
 
 struct Wall {
 	SDL_Texture* texture;

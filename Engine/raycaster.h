@@ -8,7 +8,7 @@
 #include "../Player/player.h"
 #include "projector.h"
 
-extern int WINDOW_WIDTH;
+extern const int WINDOW_WIDTH;
 
 struct Ray {
 	double angle;

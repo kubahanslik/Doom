@@ -51,13 +51,13 @@ public:
 		SDL_RenderClear(renderer);
 
 		map.draw();
-		//player.draw();
+		player.draw();
 
 		SDL_RenderPresent(renderer);
 	}
 
 	void update() {
-		//player.update();
+		player.update();
 
 		controlFPS();
 	}
