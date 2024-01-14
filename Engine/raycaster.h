@@ -29,6 +29,7 @@ private:
 	Player& player;
 	Map& map;
 	Projector& projector;
+	Ray ray;
 
 public:
 	static constexpr double FOV = 1.4;
@@ -42,6 +43,9 @@ public:
 public:
 	Raycaster(SDL_Renderer* rend, Player& p, Map& m, Projector& projector);
 	~Raycaster();
+
+	void castVerticals();
+	void castHorizontals();
 
 	void update();
 };
