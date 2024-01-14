@@ -51,6 +51,9 @@ void Raycaster::castHorizontals() {
 }
 
 void Raycaster::update() {
+	Rendereable object;
+	Wall wall;
+
 	ray.angle = player.angle + HALF_FOV - DELTA_ANGLE / 2;
 
 	for (int count = 0; count < NUM_RAYS; count++) {
@@ -63,11 +66,28 @@ void Raycaster::update() {
 		if (ray.depth_vert < ray.depth_hor) {
 			ray.depth = ray.depth_vert * std::cos(player.angle - ray.angle);
 			ray.offset = ray.cos_a > 0 ? ray.y_vert - (int)ray.y_vert : (int)ray.y_vert + 1 - ray.y_vert;
+			wall = map.getWall(ray.x_vert, ray.y_vert);
 		}
 		else {
 			ray.depth = ray.depth_hor * std::cos(player.angle - ray.angle);
 			ray.offset = ray.sin_a > 0 ? ray.x_hor - (int)ray.x_hor : (int)ray.x_hor + 1 - ray.x_hor;
+			wall = map.getWall(ray.x_hor, ray.y_hor);
 		}
+
+		object.distance = ray.depth;
+		object.texture = wall.texture;
+		
+		object.srcrect.x = ray.offset * wall.texture_width;
+		object.srcrect.y = 0;
+		object.srcrect.w = RAY_WIDTH;
+		object.srcrect.h = wall.texture_height;
+
+		object.dstrect.w = RAY_WIDTH;
+		object.dstrect.h = SCREEN_DEPTH / ray.depth;
+		object.dstrect.x = count * RAY_WIDTH;
+		object.dstrect.y = WINDOW_HEIGHT / 2 - object.dstrect.h / 2;
+
+		projector.rendereables.push_back(object);
 
 		ray.angle -= DELTA_ANGLE;
 	}

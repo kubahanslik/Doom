@@ -36,6 +36,7 @@ public:
 
 	void draw();
 	bool isInWall(double pos_x, double pos_y);
+	Wall& getWall(double pos_x, double pos_y);
 
 private:
 	SDL_Surface* getWallSurface(int id);

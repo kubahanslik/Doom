@@ -47,6 +47,13 @@ bool Map::isInWall(double pos_x, double pos_y) {
 	return false;
 }
 
+Wall& Map::getWall(double pos_x, double pos_y) {
+	for (Wall& wall : walls) {
+		if (int(pos_x) == wall.x && int(pos_y) == wall.y)
+			return wall;
+	}
+}
+
 SDL_Surface* Map::getWallSurface(int id) {
 	switch (id) {
 	case 1: return IMG_Load("assets/textures/walls/gyarab.png");

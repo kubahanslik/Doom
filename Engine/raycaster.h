@@ -9,6 +9,7 @@
 #include "projector.h"
 
 extern const int WINDOW_WIDTH;
+extern const int WINDOW_HEIGHT;
 
 struct Ray {
 	double angle;

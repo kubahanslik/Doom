@@ -3,6 +3,8 @@
 #include <SDL_image.h>
 #include "Engine/map.h"
 #include "Player/player.h"
+#include "Engine/raycaster.h"
+#include "Engine/projector.h"
 
 #define FPS 60
 
@@ -18,6 +20,8 @@ class Engine {
 
 	Map map;
 	Player player;
+	Projector projector;
+	Raycaster raycaster;
 
 	bool running = true;
 	Uint64 lastFrame = SDL_GetTicks64();
@@ -29,7 +33,9 @@ public:
 		renderer(SDL_CreateRenderer(window, -1, 0)),
 		event(),
 		map(renderer),
-		player(renderer, map, deltaTime)
+		player(renderer, map, deltaTime),
+		projector(renderer),
+		raycaster(renderer, player, map, projector)
 	{
 		// SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
@@ -50,14 +56,14 @@ public:
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
-		map.draw();
-		player.draw();
+		projector.draw();
 
 		SDL_RenderPresent(renderer);
 	}
 
 	void update() {
 		player.update();
+		raycaster.update();
 
 		controlFPS();
 	}
