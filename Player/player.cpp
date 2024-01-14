@@ -65,5 +65,12 @@ void Player::update() {
 }
 
 void Player::draw() {
-
+	SDL_Rect rect;
+	rect.x = pos_x * 100 - HALF_SIZE;
+	rect.y = pos_y * 100 - HALF_SIZE;
+	rect.w = SIZE;
+	rect.h = SIZE;
+	SDL_SetRenderDrawColor(renderer, 255, 255, 153, 255);
+	SDL_RenderDrawLine(renderer, rect.x + HALF_SIZE, rect.y + HALF_SIZE, rect.x + HALF_SIZE + std::cos(angle) * 1600, rect.y + HALF_SIZE - std::sin(angle) * 1600);
+	SDL_RenderFillRect(renderer, &rect);
 }
