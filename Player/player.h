@@ -17,8 +17,7 @@ public:
 	static const int HALF_WIDTH = WIDTH / 2;
 	static const int SIZE = 3;
 	static constexpr double SPEED = 0.005;
-	static constexpr double ROT_SPEED = 0.03;
-	static constexpr double MOUSE_SENSITIVITY = 0.0015;
+	static constexpr double MOUSE_SENSITIVITY = 0.0005;
 
 	double pos_x, pos_y;
 	double angle;
