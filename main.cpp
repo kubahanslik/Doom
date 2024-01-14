@@ -83,7 +83,7 @@ private:
 
 
 int main(int argc, char* args[]) {
-	if (SDL_Init(SDL_INIT_VIDEO) && IMG_Init(IMG_INIT_JPG & IMG_INIT_PNG)) {
+	if (SDL_Init(SDL_INIT_VIDEO) && IMG_Init(IMG_INIT_PNG)) {
 		std::cout << "[!] Init failed\n";
 	}
 	else {

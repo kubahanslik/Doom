@@ -25,6 +25,7 @@ public:
 	~Projector();
 
 	void draw();
+
 };
 
 

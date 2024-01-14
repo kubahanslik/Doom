@@ -4,9 +4,9 @@ int world_map[9][16] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
-	{1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
-	{1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1},
+	{1, 0, 0, 0, 2, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 1},
+	{1, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
+	{1, 0, 0, 0, 2, 1, 3, 1, 0, 0, 1, 1, 1, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
@@ -56,9 +56,10 @@ Wall& Map::getWall(double pos_x, double pos_y) {
 
 SDL_Surface* Map::getWallSurface(int id) {
 	switch (id) {
-	case 1: return IMG_Load("assets/textures/walls/gyarab.png");
-	case 2: return IMG_Load("assets/textures/walls/mincovna.jpg");
-	default: return IMG_Load("assets/textures/walls/gyarab.png");
+	case 1: return IMG_Load("assets/textures/walls/1.png");
+	case 2: return IMG_Load("assets/textures/walls/2.png");
+	case 3: return IMG_Load("assets/textures/walls/3.png");
+	default: return IMG_Load("assets/textures/walls/1.png");
 	}
 }
 
