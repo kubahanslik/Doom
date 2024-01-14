@@ -4,10 +4,11 @@
 #include <iostream>
 #include <SDL.h>
 #include <cmath>
-#include "engine.h"
 #include "map.h"
 #include "../Player/player.h"
 #include "projector.h"
+
+extern int WINDOW_WIDTH;
 
 struct Ray {
 	double angle;
@@ -35,7 +36,7 @@ public:
 	static const int NUM_RAYS = 800;
 	static constexpr double DELTA_ANGLE = FOV / NUM_RAYS;
 	static const int MAX_DEPTH = 20;
-	static const int RAY_WIDTH = Engine::WINDOW_WIDTH / NUM_RAYS;
+	static const int RAY_WIDTH; // WINDOW_WIDTH / NUM_RAYS
 	static const double SCREEN_DEPTH;
 
 public:

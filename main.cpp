@@ -6,9 +6,9 @@
 
 #define FPS 60
 
-extern const int TARGET_DELTA_TIME = 1000 / FPS;
-extern const int WINDOW_WIDTH = 1600;
-extern const int WINDOW_HEIGHT = 900;
+const int TARGET_DELTA_TIME = 1000 / FPS;
+const int WINDOW_WIDTH = 1600;
+const int WINDOW_HEIGHT = 900;
 
 
 class Engine {

@@ -6,6 +6,8 @@
 #include <SDL_image.h>
 #include <vector>
 
+extern int WINDOW_WIDTH;
+extern int WINDOW_HEIGHT;
 
 struct Wall {
 	SDL_Texture* texture;
@@ -41,7 +43,5 @@ private:
 	void loadWalls();
 
 };
-
-#include "engine.h"
 
 #endif // !MAP

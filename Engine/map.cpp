@@ -16,8 +16,8 @@ Map::Map(SDL_Renderer* renderer) :
 	renderer(renderer),
 	map_length_x(sizeof(world_map[0]) / sizeof(int)),
 	map_length_y(sizeof(world_map) / sizeof(int) / map_length_x),
-	ratio_x(Engine::WINDOW_WIDTH / map_length_x),
-	ratio_y(Engine::WINDOW_HEIGHT / map_length_y)
+	ratio_x(WINDOW_WIDTH / map_length_x),
+	ratio_y(WINDOW_HEIGHT / map_length_y)
 {
 	loadWalls();
 }

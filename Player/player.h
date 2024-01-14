@@ -36,6 +36,4 @@ public:
 	void draw();
 };
 
-#include "../Engine/engine.h"
-
 #endif // !PLAYER
