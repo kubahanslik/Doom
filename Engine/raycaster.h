@@ -28,7 +28,7 @@ private:
 	SDL_Renderer* renderer;
 	Player& player;
 	Map& map;
-	Projector projector;
+	Projector& projector;
 
 public:
 	static constexpr double FOV = 1.4;
@@ -40,11 +40,10 @@ public:
 	static const double SCREEN_DEPTH;
 
 public:
-	Raycaster(SDL_Renderer* rend, Player& p, Map& m);
+	Raycaster(SDL_Renderer* rend, Player& p, Map& m, Projector& projector);
 	~Raycaster();
 
 	void update();
-
 };
 
 

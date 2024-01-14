@@ -55,10 +55,10 @@ void Player::update() {
 		dy += cos_speed;
 	}
 
-	if (!map.isInWall(pos_x + dx, pos_y)) {
+	if (!map.isInWall(pos_x + dx * SIZE, pos_y)) {
 		pos_x += dx;
 	}
-	if (!map.isInWall(pos_x, pos_y + dy)) {
+	if (!map.isInWall(pos_x, pos_y + dy * SIZE)) {
 		pos_y += dy;
 	}
 
@@ -66,11 +66,11 @@ void Player::update() {
 
 void Player::draw() {
 	SDL_Rect rect;
-	rect.x = pos_x * 100 - HALF_SIZE;
-	rect.y = pos_y * 100 - HALF_SIZE;
-	rect.w = SIZE;
-	rect.h = SIZE;
+	rect.x = pos_x * 100 - HALF_WIDTH;
+	rect.y = pos_y * 100 - HALF_WIDTH;
+	rect.w = WIDTH;
+	rect.h = WIDTH;
 	SDL_SetRenderDrawColor(renderer, 255, 255, 153, 255);
-	SDL_RenderDrawLine(renderer, rect.x + HALF_SIZE, rect.y + HALF_SIZE, rect.x + HALF_SIZE + std::cos(angle) * 1600, rect.y + HALF_SIZE - std::sin(angle) * 1600);
+	SDL_RenderDrawLine(renderer, rect.x + HALF_WIDTH, rect.y + HALF_WIDTH, rect.x + HALF_WIDTH + std::cos(angle) * 1600, rect.y + HALF_WIDTH - std::sin(angle) * 1600);
 	SDL_RenderFillRect(renderer, &rect);
 }

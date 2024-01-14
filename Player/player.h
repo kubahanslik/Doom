@@ -13,9 +13,9 @@ private:
 	Uint64& deltaTime;
 
 public:
-	static const int SIZE = 30;
-	static const int HALF_SIZE = SIZE / 2;
-	static const int WIDTH = 3;
+	static const int WIDTH = 30;
+	static const int HALF_WIDTH = WIDTH / 2;
+	static const int SIZE = 3;
 	static constexpr double SPEED = 0.005;
 	static constexpr double ROT_SPEED = 0.06;
 	static constexpr double MOUSE_SENSITIVITY = 0.0015;
