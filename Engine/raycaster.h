@@ -39,7 +39,7 @@ public:
 	static constexpr double DELTA_ANGLE = FOV / NUM_RAYS;
 	static const int MAX_DEPTH = 20;
 	static const int RAY_WIDTH; // WINDOW_WIDTH / NUM_RAYS
-	static const double SCREEN_DEPTH;
+	static const double SCREEN_DEPTH; // NUM_RAYS / std::tan(HALF_FOV);
 
 public:
 	Raycaster(SDL_Renderer* rend, Player& p, Map& m, Projector& projector);

@@ -10,9 +10,10 @@ Projector::Projector(SDL_Renderer* rend) :
 Projector::~Projector() {}
 
 void Projector::draw() {
-	// Sort array
+	// Sort array by distance
 	std::sort(rendereables.begin(), rendereables.end(), [](Rendereable& a, Rendereable& b) { return a.distance > b.distance; });
 
+	// Render all rendereables
 	for (Rendereable& object : rendereables) {
 		SDL_RenderCopy(renderer, object.texture, &object.srcrect, &object.dstrect);
 	}
