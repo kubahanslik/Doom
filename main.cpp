@@ -5,6 +5,7 @@
 #include "Player/player.h"
 #include "Engine/raycaster.h"
 #include "Engine/projector.h"
+#include "Sprites/spritehandler.h"
 
 #define FPS 60
 
@@ -22,6 +23,7 @@ class Engine {
 	Player player;
 	Projector projector;
 	Raycaster raycaster;
+	SpriteHandler sprite_handler;
 
 	bool running = true;
 	Uint64 lastFrame = SDL_GetTicks64();
@@ -34,8 +36,9 @@ public:
 		event(),
 		map(renderer),
 		player(renderer, map, deltaTime),
-		projector(renderer),
-		raycaster(renderer, player, map, projector)
+		projector(renderer, player),
+		raycaster(renderer, player, map, projector),
+		sprite_handler(renderer, player, projector)
 	{
 		// SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
@@ -63,6 +66,7 @@ public:
 
 	void update() {
 		player.update();
+		sprite_handler.update();
 		raycaster.update();
 
 		controlFPS();

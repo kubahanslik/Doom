@@ -1,6 +1,6 @@
 #include "sprite.h"
 
-Sprite::Sprite(SDL_Renderer* renderer, Player& player, Projector& proj, const char* texture_path, int pos_x, int pos_y, double scale, double shift) :
+Sprite::Sprite(SDL_Renderer* renderer, Player& player, Projector& proj, const char* texture_path, double pos_x, double pos_y, double scale, double shift) :
 	renderer(renderer),
 	player(player),
 	projector(proj),
@@ -24,17 +24,24 @@ Sprite::Sprite(SDL_Renderer* renderer, Player& player, Projector& proj, const ch
 Sprite::~Sprite() {}
 
 void Sprite::update() {
-	int dx = pos_x - player.pos_x;
-	int dy = player.pos_y - pos_y;
+	double dx = pos_x - player.pos_x;
+	double dy = player.pos_y - pos_y;
 	double delta_angle = std::atan2(dy, dx) - player.angle;
-	double depth = std::hypot(dx, dy) * std::cos(delta_angle);
+
+	if (delta_angle > M_PI)
+		delta_angle -= M_PI * 2;
+	else if (delta_angle < -M_PI)
+		delta_angle += M_PI * 2;
+
+	double depth = std::abs(std::hypot(dx, dy) * std::cos(delta_angle));
 	int delta_pixels = delta_angle / Raycaster::DELTA_ANGLE * Raycaster::RAY_WIDTH;
 
 	rendereable.distance = depth;
 	rendereable.dstrect.h = Raycaster::SCREEN_DEPTH / depth * scale;
-	rendereable.dstrect.w = rendereable.dstrect.h / rendereable.srcrect.h * rendereable.srcrect.w;
-	rendereable.dstrect.x = WINDOW_WIDTH / 2 - delta_pixels;
-	rendereable.dstrect.y = WINDOW_HEIGHT / 2 + rendereable.dstrect.h / 2 + shift * rendereable.dstrect.h;
+	rendereable.dstrect.w = (double)rendereable.dstrect.h / rendereable.srcrect.h * rendereable.srcrect.w;
+	rendereable.dstrect.x = WINDOW_WIDTH / 2 - delta_pixels - rendereable.dstrect.w / 2;
+	rendereable.dstrect.y = WINDOW_HEIGHT / 2 - rendereable.dstrect.h / 2 + shift * rendereable.dstrect.h;
 
-	projector.rendereables.push_back(rendereable);
+	if (-rendereable.srcrect.w < rendereable.dstrect.x && rendereable.dstrect.x < WINDOW_WIDTH + rendereable.srcrect.w && rendereable.distance > 0.5)
+		projector.rendereables.push_back(rendereable);
 }

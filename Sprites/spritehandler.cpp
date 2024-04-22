@@ -1,13 +1,13 @@
 #include "spritehandler.h"
 
 SpriteHandler::SpriteHandler(SDL_Renderer* renderer, Player& player, Projector& projector) {
-	addSprite(Sprite(renderer, player, projector, "assets/sprites/candlebra.png", 0.5, 0.5, 1, 0));
+	addSprite(Sprite(renderer, player, projector, "assets/sprites/candlebra.png", 3, 4.5, 0.7, 0.27));
 }
 
 SpriteHandler::~SpriteHandler() {}
 
 void SpriteHandler::update() {
-	for (Sprite sprite : sprites) {
+	for (Sprite& sprite : sprites) {
 		sprite.update();
 	}
 }

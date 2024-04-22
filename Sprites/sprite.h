@@ -13,7 +13,7 @@ extern const int WINDOW_HEIGHT;
 
 class Sprite {
 private:
-	int pos_x, pos_y;
+	double pos_x, pos_y;
 	double scale, shift;
 	Rendereable rendereable;
 	SDL_Renderer* renderer;
@@ -21,7 +21,7 @@ private:
 	Projector& projector;
 
 public:
-	Sprite(SDL_Renderer* renderer, Player& player, Projector& proj, const char* texture_path, int pos_x, int pos_y, double scale, double shift);
+	Sprite(SDL_Renderer* renderer, Player& player, Projector& proj, const char* texture_path, double pos_x, double pos_y, double scale, double shift);
 	~Sprite();
 
 	void update();
