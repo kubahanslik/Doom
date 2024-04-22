@@ -26,7 +26,6 @@ private:
 	SDL_Rect floor_rect;
 	SDL_Texture* sky_texture;
 	SDL_Rect sky_src_rect, sky_dest_rect1, sky_dest_rect2;
-	int sky_offset;
 
 public:
 	std::vector<Rendereable> rendereables;

@@ -29,8 +29,6 @@ Projector::Projector(SDL_Renderer* rend, Player& player) :
 	sky_dest_rect2.x = WINDOW_WIDTH;
 	sky_dest_rect2.y = 0;
 
-	sky_offset = WINDOW_WIDTH;
-
 	sky_texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 	SDL_FreeSurface(surface);
@@ -53,9 +51,18 @@ void Projector::draw() {
 }
 
 void Projector::drawSky() {
-	sky_offset = (sky_offset - player.mouse_rel_x * 4) % WINDOW_WIDTH;
-	sky_dest_rect1.x = sky_offset - sky_dest_rect1.w;
-	sky_dest_rect2.x = sky_offset;
+	sky_dest_rect1.x -= player.mouse_rel_x * 4;
+	sky_dest_rect2.x -= player.mouse_rel_x * 4;
+
+	if (sky_dest_rect1.x <= -WINDOW_WIDTH)
+		sky_dest_rect1.x = sky_dest_rect2.x + WINDOW_WIDTH;
+	else if (sky_dest_rect1.x >= WINDOW_WIDTH)
+		sky_dest_rect1.x = sky_dest_rect2.x - WINDOW_WIDTH;
+
+	if (sky_dest_rect2.x <= -WINDOW_WIDTH)
+		sky_dest_rect2.x = sky_dest_rect1.x + WINDOW_WIDTH;
+	else if (sky_dest_rect2.x >= WINDOW_WIDTH)
+		sky_dest_rect2.x = sky_dest_rect1.x - WINDOW_WIDTH;
 
 	SDL_RenderCopy(renderer, sky_texture, &sky_src_rect, &sky_dest_rect1);
 	SDL_RenderCopy(renderer, sky_texture, &sky_src_rect, &sky_dest_rect2);
