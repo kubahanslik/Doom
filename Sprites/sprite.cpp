@@ -41,7 +41,9 @@ void Sprite::update() {
 	rendereable.dstrect.w = (double)rendereable.dstrect.h / rendereable.srcrect.h * rendereable.srcrect.w;
 	rendereable.dstrect.x = WINDOW_WIDTH / 2 - delta_pixels - rendereable.dstrect.w / 2;
 	rendereable.dstrect.y = WINDOW_HEIGHT / 2 - rendereable.dstrect.h / 2 + shift * rendereable.dstrect.h;
+}
 
+void Sprite::draw() {
 	if (-rendereable.srcrect.w < rendereable.dstrect.x && rendereable.dstrect.x < WINDOW_WIDTH + rendereable.srcrect.w && rendereable.distance > 0.5)
 		projector.rendereables.push_back(rendereable);
 }

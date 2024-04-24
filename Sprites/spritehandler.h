@@ -13,6 +13,7 @@ public:
 	~SpriteHandler();
 
 	void update();
+	void draw();
 
 private:
 	void addSprite(Sprite sprite);

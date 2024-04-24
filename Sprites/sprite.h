@@ -25,6 +25,7 @@ public:
 	~Sprite();
 
 	void update();
+	virtual void draw();
 };
 
 #endif // !SPRITE

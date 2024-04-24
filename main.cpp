@@ -59,6 +59,7 @@ public:
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
 
+		sprite_handler.draw();
 		projector.draw();
 
 		SDL_RenderPresent(renderer);
