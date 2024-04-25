@@ -3,10 +3,12 @@
 
 #include <vector>
 #include "sprite.h"
+#include "AnimatedSprite.h"
+#include "StaticSprites/candelabra.h"
 
 class SpriteHandler {
 private:
-	std::vector<Sprite> sprites;
+	std::vector<Sprite*> sprites;
 
 public:
 	SpriteHandler(SDL_Renderer* renderer, Player& player, Projector& projector);
@@ -16,7 +18,7 @@ public:
 	void draw();
 
 private:
-	void addSprite(Sprite sprite);
+	void addSprite(Sprite* sprite);
 };
 
 #endif // !SPRITE_HANDLER

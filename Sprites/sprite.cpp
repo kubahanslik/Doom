@@ -10,6 +10,9 @@ Sprite::Sprite(SDL_Renderer* renderer, Player& player, Projector& proj, const ch
 	scale(scale),
 	shift(shift)
 {
+	if (texture_path == nullptr)
+		return;
+
 	SDL_Surface* surface = IMG_Load(texture_path);
 
 	rendereable.texture = SDL_CreateTextureFromSurface(renderer, surface);

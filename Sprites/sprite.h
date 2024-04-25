@@ -12,13 +12,13 @@ extern const int WINDOW_WIDTH;
 extern const int WINDOW_HEIGHT;
 
 class Sprite {
-private:
+protected:
 	double pos_x, pos_y;
 	double scale, shift;
-	Rendereable rendereable;
 	SDL_Renderer* renderer;
 	Player& player;
 	Projector& projector;
+	Rendereable rendereable;
 
 public:
 	Sprite(SDL_Renderer* renderer, Player& player, Projector& proj, const char* texture_path, double pos_x, double pos_y, double scale, double shift);
