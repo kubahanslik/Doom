@@ -31,10 +31,14 @@ void Sprite::update() {
 	double dy = player.pos_y - pos_y;
 	double delta_angle = std::atan2(dy, dx) - player.angle;
 
-	if (delta_angle > M_PI)
+	if (delta_angle > M_PI) {
 		delta_angle -= M_PI * 2;
-	else if (delta_angle < -M_PI)
+		player.angle += M_PI * 2;
+	}
+	else if (delta_angle < -M_PI) {
 		delta_angle += M_PI * 2;
+		player.angle -= M_PI * 2;
+	}
 
 	double depth = std::abs(std::hypot(dx, dy) * std::cos(delta_angle));
 	int delta_pixels = delta_angle / Raycaster::DELTA_ANGLE * Raycaster::RAY_WIDTH;

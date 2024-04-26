@@ -2,8 +2,7 @@
 
 SpriteHandler::SpriteHandler(SDL_Renderer* renderer, Player& player, Projector& projector) {
 	addSprite((Sprite*)new Candelabra(renderer, player, projector));
-
-	addSprite((Sprite*) new AnimatedSprite(renderer, player, projector, "assets/animated_sprites/red_light", 10000, 3, 4, 0.75, 0.23));
+	addSprite((Sprite*) new RedLight(renderer, player, projector));
 }
 
 SpriteHandler::~SpriteHandler() {

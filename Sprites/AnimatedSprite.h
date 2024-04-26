@@ -4,8 +4,8 @@
 #include <filesystem>
 #include "sprite.h"
 
-class AnimatedSprite : Sprite {
-private:
+class AnimatedSprite : protected Sprite {
+protected:
 	std::vector<SDL_Texture*> animation_textures;
 	int current_texture_index;
 	int animation_delta_time;
