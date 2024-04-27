@@ -6,6 +6,7 @@
 #include "AnimatedSprite.h"
 #include "StaticSprites/candelabra.h"
 #include "AnimatedSprites/red_light.h"
+#include "AnimatedSprites/green_light.h"
 
 class SpriteHandler {
 private:

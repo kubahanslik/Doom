@@ -7,7 +7,7 @@ AnimatedSprite::AnimatedSprite(SDL_Renderer* renderer,
                                double animation_time, double pos_x, 
                                double pos_y, double scale, 
                                double shift) : Sprite(
-                               renderer, player, proj, nullptr, pos_x, pos_y, 1, 0
+                               renderer, player, proj, nullptr, pos_x, pos_y, scale, shift
                                )
 {
     for (const auto& entry : std::filesystem::directory_iterator(textures_directory_path)) {

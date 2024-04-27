@@ -3,6 +3,7 @@
 SpriteHandler::SpriteHandler(SDL_Renderer* renderer, Player& player, Projector& projector) {
 	addSprite((Sprite*)new Candelabra(renderer, player, projector));
 	addSprite((Sprite*) new RedLight(renderer, player, projector));
+	addSprite((Sprite*) new GreenLight(renderer, player, projector));
 }
 
 SpriteHandler::~SpriteHandler() {

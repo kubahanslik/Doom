@@ -6,6 +6,7 @@
 #include "Engine/raycaster.h"
 #include "Engine/projector.h"
 #include "Sprites/spritehandler.h"
+#include "Player/Weapon/shotgun.h"
 
 #define FPS 60
 
@@ -24,6 +25,7 @@ class Engine {
 	Projector projector;
 	Raycaster raycaster;
 	SpriteHandler sprite_handler;
+	Shotgun shotgun;
 
 	bool running = true;
 	Uint64 lastFrame = SDL_GetTicks64();
@@ -38,7 +40,8 @@ public:
 		player(renderer, map, deltaTime),
 		projector(renderer, player),
 		raycaster(renderer, player, map, projector),
-		sprite_handler(renderer, player, projector)
+		sprite_handler(renderer, player, projector),
+		shotgun(renderer, player, projector)
 	{
 		// SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
@@ -51,7 +54,9 @@ public:
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT)
 				running = false;
-
+			else if (event.type == SDL_MOUSEBUTTONDOWN) {
+				shotgun.shoot();
+			}
 		}
 	}
 
@@ -61,6 +66,7 @@ public:
 
 		sprite_handler.draw();
 		projector.draw();
+		shotgun.draw();
 
 		SDL_RenderPresent(renderer);
 	}

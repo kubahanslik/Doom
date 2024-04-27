@@ -3,7 +3,7 @@
 
 #include "weapon.h"
 
-class Shotgun : Weapon {
+class Shotgun : public Weapon {
 public:
 	Shotgun(SDL_Renderer* renderer, Player& player, Projector& proj);
 	~Shotgun();
