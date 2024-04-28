@@ -26,6 +26,9 @@ public:
 
 	void update();
 	virtual void draw();
+
+	void setX(double x);
+	void setY(double y);
 };
 
 #endif // !SPRITE

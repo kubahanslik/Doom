@@ -54,3 +54,6 @@ void Sprite::draw() {
 	if (-rendereable.srcrect.w < rendereable.dstrect.x && rendereable.dstrect.x < WINDOW_WIDTH + rendereable.srcrect.w && rendereable.distance > 0.5)
 		projector.rendereables.push_back(rendereable);
 }
+
+void Sprite::setX(double x) { pos_x = x; }
+void Sprite::setY(double y) { pos_y = y; }

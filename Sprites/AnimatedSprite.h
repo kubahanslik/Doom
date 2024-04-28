@@ -4,7 +4,7 @@
 #include <filesystem>
 #include "sprite.h"
 
-class AnimatedSprite : protected Sprite {
+class AnimatedSprite : public Sprite {
 protected:
 	std::vector<SDL_Texture*> animation_textures;
 	int current_texture_index;
