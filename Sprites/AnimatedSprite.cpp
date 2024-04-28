@@ -24,6 +24,7 @@ AnimatedSprite::AnimatedSprite(SDL_Renderer* renderer,
         SDL_FreeSurface(surface);
     }
 
+    is_ending = false;
     current_texture_index = 0;
     animation_delta_time = animation_time / animation_textures.size();
     lastFrame = SDL_GetTicks64();
@@ -34,8 +35,11 @@ AnimatedSprite::~AnimatedSprite() {
 }
 
 void AnimatedSprite::draw() {
+    is_ending = false;
     if (-rendereable.srcrect.w < rendereable.dstrect.x && rendereable.dstrect.x < WINDOW_WIDTH + rendereable.srcrect.w && rendereable.distance > 0.5) {
         if (SDL_GetTicks64() - lastFrame > animation_delta_time) {
+            if (current_texture_index == animation_textures.size() - 1)
+                is_ending = true;
             lastFrame = SDL_GetTicks64();
             current_texture_index = (current_texture_index + 1) % animation_textures.size();
             rendereable.texture = animation_textures[current_texture_index];

@@ -1,9 +1,9 @@
 #include "enemy.h"
 
-Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time , double pos_x, double pos_y) :
-	attack_animator(renderer, player, proj, attack_textures_path, attack_animation_time, pos_x, pos_y, 0.8, 0),
-	hit_animator(renderer, player, proj, hit_textures_path, hit_animation_time, pos_x, pos_y, 0.8, 0),
-	walk_animator(renderer, player, proj, walk_textures_path, walk_animation_time, pos_x, pos_y, 0.8, 0),
+Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time , double pos_x, double pos_y, double scale, double shift) :
+	attack_animator(renderer, player, proj, attack_textures_path, attack_animation_time, pos_x, pos_y, scale, shift),
+	hit_animator(renderer, player, proj, hit_textures_path, hit_animation_time, pos_x, pos_y, scale, shift),
+	walk_animator(renderer, player, proj, walk_textures_path, walk_animation_time, pos_x, pos_y, scale, shift),
 	walking(true),
 	damaged(false),
 	attacking(false),
@@ -16,7 +16,7 @@ Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, const char
 }
 
 Enemy::~Enemy() {
-
+	
 }
 
 void Enemy::draw() {
@@ -42,4 +42,11 @@ void Enemy::update() {
 	attack_animator.update();
 	hit_animator.update();
 	walk_animator.update();
+
+	if (hit_animator.is_ending)
+		damaged = false;
+}
+
+void Enemy::getHit() {
+	damaged = true;
 }
