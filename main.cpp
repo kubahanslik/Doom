@@ -44,7 +44,7 @@ public:
 		raycaster(renderer, player, map, projector),
 		sprite_handler(renderer, player, projector),
 		shotgun(renderer, player, projector),
-		enemy_handler(renderer, projector, player)
+		enemy_handler(renderer, projector, player, map)
 	{
 		// SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
