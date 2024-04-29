@@ -72,7 +72,6 @@ void Enemy::update() {
 		std::random_device rd;
 		attacking = true;
 		player.hp -= (float)rd() / rd.max() < chance_of_hit ? damage : 0;
-		std::cout << "Hp: " << player.hp << "\n";
 	}
 	else {
 		attacking = false;

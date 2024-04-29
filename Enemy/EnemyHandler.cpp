@@ -2,6 +2,9 @@
 
 EnemyHandler::EnemyHandler(SDL_Renderer* renderer, Projector& projector, Player& player, Map& map, Uint64& deltaTime) {
 	addEnemy((Enemy*)new Soldier(renderer, projector, player, map, deltaTime, 3.5, 4.5));
+	addEnemy((Enemy*)new Soldier(renderer, projector, player, map, deltaTime, 3.5, 2.5));
+	addEnemy((Enemy*)new Soldier(renderer, projector, player, map, deltaTime, 3.5, 1.5));
+	addEnemy((Enemy*)new Soldier(renderer, projector, player, map, deltaTime, 3.5, 5.5));
 }
 
 EnemyHandler::~EnemyHandler() {
