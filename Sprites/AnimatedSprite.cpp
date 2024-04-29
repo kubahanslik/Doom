@@ -48,3 +48,7 @@ void AnimatedSprite::draw() {
         projector.rendereables.push_back(rendereable);
     }
 }
+
+int AnimatedSprite::getTexturesCount() {
+    return animation_textures.size();
+}

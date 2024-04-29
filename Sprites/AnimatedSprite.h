@@ -7,9 +7,9 @@
 class AnimatedSprite : public Sprite {
 protected:
 	std::vector<SDL_Texture*> animation_textures;
-	int current_texture_index;
 	int animation_delta_time;
 public:
+	int current_texture_index;
 	bool is_ending;
 	Uint64 lastFrame;
 
@@ -18,6 +18,8 @@ public:
 	~AnimatedSprite();
 
 	void draw();
+
+	int getTexturesCount();
 };
 
 #endif // !ANIMATED_SPRITE

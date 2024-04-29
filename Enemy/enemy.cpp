@@ -1,12 +1,13 @@
 #include "enemy.h"
 
-Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time , double pos_x, double pos_y, double scale, double shift, int hp) :
+Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, const char* death_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time, double death_animation_time, double pos_x, double pos_y, double scale, double shift, int hp) :
 	player(player),
 	map(map),
 	ray(),
 	attack_animator(renderer, player, proj, attack_textures_path, attack_animation_time, pos_x, pos_y, scale, shift),
 	hit_animator(renderer, player, proj, hit_textures_path, hit_animation_time, pos_x, pos_y, scale, shift),
 	walk_animator(renderer, player, proj, walk_textures_path, walk_animation_time, pos_x, pos_y, scale, shift),
+	death_animator(renderer, player, proj, death_textures_path, death_animation_time, pos_x, pos_y, scale, shift),
 	walking(true),
 	damaged(false),
 	attacking(false),
@@ -24,7 +25,9 @@ Enemy::~Enemy() {
 
 void Enemy::draw() {
 	if (dead) {
-		return;
+		if (death_animator.current_texture_index == death_animator.getTexturesCount() - 1)
+			death_animator.current_texture_index = death_animator.getTexturesCount() - 2;
+		death_animator.draw();
 	}
 	else if (damaged) {
 		hit_animator.draw();
@@ -44,10 +47,13 @@ void Enemy::update() {
 	hit_animator.setY(pos_y);
 	walk_animator.setX(pos_x);
 	walk_animator.setY(pos_y);
+	death_animator.setX(pos_x);
+	death_animator.setY(pos_y);
 
 	attack_animator.update();
 	hit_animator.update();
 	walk_animator.update();
+	death_animator.update();
 
 	if (hit_animator.is_ending) {
 		damaged = false;

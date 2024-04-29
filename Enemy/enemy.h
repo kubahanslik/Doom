@@ -11,6 +11,7 @@ protected:
 	AnimatedSprite attack_animator;
 	AnimatedSprite hit_animator;
 	AnimatedSprite walk_animator;
+	AnimatedSprite death_animator;
 
 	Player& player;
 	Ray ray;
@@ -31,7 +32,7 @@ private:
 	void move();
 
 public:
-	Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time, double pos_x, double pos_y, double scale, double shift, int hp);
+	Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, const char* death_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time, double death_animation_time, double pos_x, double pos_y, double scale, double shift, int hp);
 	~Enemy();
 
 	void draw();
