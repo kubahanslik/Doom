@@ -18,6 +18,7 @@ protected:
 	SDL_Renderer* renderer;
 	Player& player;
 	Projector& projector;
+public:
 	Rendereable rendereable;
 
 public:

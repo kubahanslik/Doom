@@ -19,7 +19,6 @@ void EnemyHandler::draw() {
 void EnemyHandler::update() {
 	for (Enemy* enemy : enemies) {
 		enemy->update();
-		std::cout << enemy->isInSight() << "\n";
 	}
 }
 
@@ -29,6 +28,6 @@ void EnemyHandler::addEnemy(Enemy* enemy) {
 
 void EnemyHandler::checkForHits() {
 	for (Enemy* enemy : enemies) {
-		std::cout << enemy->isInSight() << "\n";
+		enemy->isHit();
 	}
 }

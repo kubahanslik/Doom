@@ -4,7 +4,7 @@
 #include "../../Sprites/AnimatedSprite.h"
 
 class Weapon : AnimatedSprite {
-private:
+public:
 	bool is_shooting;
 
 public:

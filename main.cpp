@@ -58,6 +58,9 @@ public:
 			if (event.type == SDL_QUIT)
 				running = false;
 			else if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (!shotgun.is_shooting) {
+					enemy_handler.checkForHits();
+				}
 				shotgun.shoot();
 			}
 		}

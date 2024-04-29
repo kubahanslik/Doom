@@ -46,15 +46,26 @@ void Enemy::update() {
 	hit_animator.update();
 	walk_animator.update();
 
-	if (hit_animator.is_ending)
+	if (hit_animator.is_ending) {
 		damaged = false;
+		hit_animator.is_ending = false;
+	}
 }
 
 void Enemy::getHit() {
 	damaged = true;
+	hit_animator.lastFrame = SDL_GetTicks64();
 }
 
 bool Enemy::isHit() {
+	if (!isInSight()) {
+		return false;
+	}
+
+	if (WINDOW_WIDTH / 2 - walk_animator.rendereable.dstrect.w / 2 < walk_animator.rendereable.dstrect.x + walk_animator.rendereable.dstrect.w && walk_animator.rendereable.dstrect.x < WINDOW_WIDTH / 2 + walk_animator.rendereable.dstrect.w / 2) {
+		getHit();
+		return true;
+	}
 	return false;
 }
 
@@ -66,9 +77,6 @@ bool Enemy::isInSight() {
 	double wall_distance_vert{}, wall_distance_hor{};
 
 	ray.angle = std::atan2(player.pos_y - pos_y, pos_x - player.pos_x);
-	std::cout << "Dx: " << pos_x - player.pos_x << "\n";
-	std::cout << "Dy: " << player.pos_y - pos_y << "\n";
-	std::cout << "Angle: " << ray.angle << "\n";
 
 	ray.cos_a = std::cos(ray.angle);
 	ray.sin_a = std::sin(ray.angle);
@@ -86,7 +94,6 @@ bool Enemy::isInSight() {
 			break;
 		}
 		else if (getTileX() == (int)ray.x_vert && getTileY() == (int)ray.y_vert) {
-			std::cout << "[!]Player hit\n";
 			player_distance_vert = ray.depth_vert;
 			break;
 		}
@@ -107,7 +114,6 @@ bool Enemy::isInSight() {
 			break;
 		}
 		else if (getTileX() == (int)ray.x_hor && getTileY() == (int)ray.y_hor) {
-			std::cout << "[!]Player hit\n";
 			player_distance_hor = ray.depth_hor;
 			break;
 		}
