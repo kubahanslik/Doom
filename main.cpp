@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "Engine/map.h"
 #include "Player/player.h"
 #include "Engine/raycaster.h"
@@ -8,7 +9,8 @@
 #include "Sprites/spritehandler.h"
 #include "Player/Weapon/shotgun.h"
 #include "Enemy/EnemyHandler.h"
-#include "InfoBar/InfoBar.h"
+#include "GUIComponents/InfoBar.h"
+#include "GUIComponents/EndingScreen.h"
 
 #define FPS 60
 
@@ -36,6 +38,9 @@ class Engine {
 	Uint64 deltaTime = TARGET_DELTA_TIME;
 
 public:
+	EndingScreen ending_screen;
+
+public:
 	Engine() :
 		window(SDL_CreateWindow("Raycaster", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN)),
 		renderer(SDL_CreateRenderer(window, -1, 0)),
@@ -47,9 +52,10 @@ public:
 		sprite_handler(renderer, player, projector),
 		shotgun(renderer, player, projector),
 		enemy_handler(renderer, projector, player, map, deltaTime),
-		info_bar(renderer, player)
+		info_bar(renderer, player),
+		ending_screen(renderer)
 	{
-		// SDL_SetRelativeMouseMode(SDL_TRUE);
+		SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
 	~Engine() {
 		SDL_DestroyWindow(window);
@@ -92,9 +98,11 @@ public:
 	void checkForEndOfGame() {
 		if (player.isDead()) {
 			running = false;
+			ending_screen.setText("Defeat");
 		}
 		else if (!enemy_handler.anyEnemiesLeft()) {
 			running = false;
+			ending_screen.setText("Victory");
 		}
 	}
 
@@ -129,7 +137,11 @@ int main(int argc, char* args[]) {
 		engine.checkForEndOfGame();
 	}
 
+	engine.ending_screen.draw();
+
 	SDL_Quit();
+	IMG_Quit();
+	TTF_Quit();
 
 	return 0;
 }

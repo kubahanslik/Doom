@@ -5,7 +5,7 @@
 
 class RedLight : AnimatedSprite {
 public:
-	RedLight(SDL_Renderer* renderer, Player& player, Projector& proj);
+	RedLight(SDL_Renderer* renderer, Player& player, Projector& proj, double pos_x, double pos_y);
 	~RedLight();
 };
 

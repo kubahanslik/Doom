@@ -5,7 +5,7 @@
 
 class GreenLight : AnimatedSprite {
 public:
-	GreenLight(SDL_Renderer* renderer, Player& player, Projector& proj);
+	GreenLight(SDL_Renderer* renderer, Player& player, Projector& proj, double pos_x, double pos_y);
 	~GreenLight();
 };
 

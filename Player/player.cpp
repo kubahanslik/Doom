@@ -5,8 +5,8 @@ Player::Player(SDL_Renderer* rend, Map& map, Uint64& deltaTime) :
 	map(map),
 	deltaTime(deltaTime),
 	pos_x(1.5),
-	pos_y(4.5),
-	angle(0),
+	pos_y(13.5),
+	angle(M_PI/4),
 	mouse_rel_x(0),
 	mouse_rel_y(0),
 	hp(100)
@@ -62,7 +62,7 @@ void Player::update() {
 	if (!map.isInWall(pos_x, pos_y + dy * SIZE)) {
 		pos_y += dy;
 	}
-
+	std::cout << "(" << getTileX() << ", " << getTileY() << ")\n";
 }
 
 void Player::draw() {

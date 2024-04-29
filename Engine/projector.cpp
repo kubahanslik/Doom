@@ -51,8 +51,8 @@ void Projector::draw() {
 }
 
 void Projector::drawSky() {
-	sky_dest_rect1.x -= player.mouse_rel_x * 4;
-	sky_dest_rect2.x -= player.mouse_rel_x * 4;
+	sky_dest_rect1.x -= player.mouse_rel_x * 6;
+	sky_dest_rect2.x -= player.mouse_rel_x * 6;
 
 	if (sky_dest_rect1.x <= -WINDOW_WIDTH)
 		sky_dest_rect1.x = sky_dest_rect2.x + WINDOW_WIDTH;

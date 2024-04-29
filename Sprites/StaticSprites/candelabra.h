@@ -5,7 +5,7 @@
 
 class Candelabra : Sprite {
 public:
-	Candelabra(SDL_Renderer* renderer, Player& player, Projector& proj);
+	Candelabra(SDL_Renderer* renderer, Player& player, Projector& proj, double pos_x, double pos_y);
 	~Candelabra();
 };
 
