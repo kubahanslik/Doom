@@ -1,7 +1,7 @@
 #include "EnemyHandler.h"
 
-EnemyHandler::EnemyHandler(SDL_Renderer* renderer, Projector& projector, Player& player, Map& map) {
-	addEnemy((Enemy*)new Soldier(renderer, projector, player, map, 3.5, 4.5));
+EnemyHandler::EnemyHandler(SDL_Renderer* renderer, Projector& projector, Player& player, Map& map, Uint64& deltaTime) {
+	addEnemy((Enemy*)new Soldier(renderer, projector, player, map, deltaTime, 3.5, 4.5));
 }
 
 EnemyHandler::~EnemyHandler() {
@@ -30,4 +30,12 @@ void EnemyHandler::checkForHits() {
 	for (Enemy* enemy : enemies) {
 		enemy->isHit();
 	}
+}
+
+bool EnemyHandler::anyEnemiesLeft() {
+	for (Enemy* enemy : enemies) {
+		if (!enemy->isDead())
+			return true;
+	}
+	return false;
 }

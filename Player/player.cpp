@@ -8,7 +8,8 @@ Player::Player(SDL_Renderer* rend, Map& map, Uint64& deltaTime) :
 	pos_y(4.5),
 	angle(0),
 	mouse_rel_x(0),
-	mouse_rel_y(0)
+	mouse_rel_y(0),
+	hp(100)
 {
 
 }
@@ -73,4 +74,8 @@ void Player::draw() {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 153, 255);
 	SDL_RenderDrawLine(renderer, rect.x + HALF_WIDTH, rect.y + HALF_WIDTH, rect.x + HALF_WIDTH + std::cos(angle) * 1600, rect.y + HALF_WIDTH - std::sin(angle) * 1600);
 	SDL_RenderFillRect(renderer, &rect);
+}
+
+bool Player::isDead() {
+	return hp < 1;
 }

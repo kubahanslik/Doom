@@ -44,7 +44,7 @@ public:
 		raycaster(renderer, player, map, projector),
 		sprite_handler(renderer, player, projector),
 		shotgun(renderer, player, projector),
-		enemy_handler(renderer, projector, player, map)
+		enemy_handler(renderer, projector, player, map, deltaTime)
 	{
 		// SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
@@ -84,6 +84,15 @@ public:
 		controlFPS();
 	}
 
+	void checkForEndOfGame() {
+		if (player.isDead()) {
+			running = false;
+		}
+		else if (!enemy_handler.anyEnemiesLeft()) {
+			running = false;
+		}
+	}
+
 	bool isRunning() { return running; }
 
 private:
@@ -112,6 +121,7 @@ int main(int argc, char* args[]) {
 		engine.handleEvents();
 		engine.update();
 		engine.draw();
+		engine.checkForEndOfGame();
 	}
 
 	SDL_Quit();

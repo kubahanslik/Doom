@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, const char* death_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time, double death_animation_time, double pos_x, double pos_y, double scale, double shift, int hp) :
+Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, Uint64& deltaTime, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, const char* death_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time, double death_animation_time, double pos_x, double pos_y, double scale, double shift, int hp, double speed, double attack_range, double chance_of_hit, int damage) :
 	player(player),
 	map(map),
 	ray(),
@@ -14,7 +14,12 @@ Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, 
 	dead(false),
 	hp(hp),
 	pos_x(pos_x),
-	pos_y(pos_y)
+	pos_y(pos_y),
+	speed(speed),
+	deltaTime(deltaTime),
+	attack_range(attack_range),
+	damage(damage),
+	chance_of_hit(chance_of_hit)
 {
 
 }
@@ -41,6 +46,9 @@ void Enemy::draw() {
 }
 
 void Enemy::update() {
+	if (!dead && !attacking)
+		move();
+
 	attack_animator.setX(pos_x);
 	attack_animator.setY(pos_y);
 	hit_animator.setX(pos_x);
@@ -59,8 +67,15 @@ void Enemy::update() {
 		damaged = false;
 		hit_animator.is_ending = false;
 	}
-	if (hp < 1) {
-		dead = true;
+	dead = hp < 1;
+	if (canShoot()) {
+		std::random_device rd;
+		attacking = true;
+		player.hp -= (float)rd() / rd.max() < chance_of_hit ? damage : 0;
+		std::cout << "Hp: " << player.hp << "\n";
+	}
+	else {
+		attacking = false;
 	}
 }
 
@@ -153,5 +168,26 @@ int Enemy::getTileY() {
 }
 
 void Enemy::move() {
+	double dx = player.pos_x - pos_x;
+	double dy = pos_y - player.pos_y;
+	double d_depth = std::hypot(dx, dy);
 
+	if (!map.isInWall(pos_x + dx / d_depth * speed * deltaTime, pos_y))
+		pos_x += dx / d_depth * speed * deltaTime;
+	if (!map.isInWall(pos_x, pos_y - dy / d_depth * speed * deltaTime))
+		pos_y -= dy / d_depth * speed * deltaTime;
+}
+
+bool Enemy::canShoot() {
+	if (!isInSight())
+		return false;
+
+	double dx = player.pos_x - pos_x;
+	double dy = pos_y - player.pos_y;
+	
+	return attack_range > std::hypot(dx, dy);
+}
+
+bool Enemy::isDead() {
+	return dead;
 }

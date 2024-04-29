@@ -22,6 +22,7 @@ public:
 	double pos_x, pos_y;
 	double angle;
 	int mouse_rel_x, mouse_rel_y;
+	int hp;
 
 
 public:
@@ -33,6 +34,8 @@ public:
 
 	void update();
 	void draw();
+
+	bool isDead();
 };
 
 #endif // !PLAYER
