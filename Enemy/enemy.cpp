@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time , double pos_x, double pos_y, double scale, double shift) :
+Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, const char* attack_textures_path, const char* hit_textures_path, const char* walk_textures_path, double attack_animation_time, double hit_animation_time, double walk_animation_time , double pos_x, double pos_y, double scale, double shift, int hp) :
 	player(player),
 	map(map),
 	ray(),
@@ -11,7 +11,7 @@ Enemy::Enemy(SDL_Renderer* renderer, Projector& proj, Player& player, Map& map, 
 	damaged(false),
 	attacking(false),
 	dead(false),
-	hp(),
+	hp(hp),
 	pos_x(pos_x),
 	pos_y(pos_y)
 {
@@ -23,7 +23,10 @@ Enemy::~Enemy() {
 }
 
 void Enemy::draw() {
-	if (damaged) {
+	if (dead) {
+		return;
+	}
+	else if (damaged) {
 		hit_animator.draw();
 	}
 	else if (attacking) {
@@ -50,11 +53,16 @@ void Enemy::update() {
 		damaged = false;
 		hit_animator.is_ending = false;
 	}
+	if (hp < 1) {
+		dead = true;
+	}
 }
 
 void Enemy::getHit() {
 	damaged = true;
 	hit_animator.lastFrame = SDL_GetTicks64();
+
+	hp -= Shotgun::DAMAGE;
 }
 
 bool Enemy::isHit() {
@@ -136,4 +144,8 @@ int Enemy::getTileX() {
 
 int Enemy::getTileY() {
 	return (int)pos_y;
+}
+
+void Enemy::move() {
+
 }

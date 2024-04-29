@@ -1,6 +1,6 @@
 #include "weapon.h"
 
-Weapon::Weapon(SDL_Renderer* renderer, Player& player, Projector& proj, const char* textures_directory_path, double animation_time) : AnimatedSprite(renderer, player, proj, textures_directory_path, animation_time, 0, 0, 0.5, 0), is_shooting(false) {
+Weapon::Weapon(SDL_Renderer* renderer, Player& player, Projector& proj, const char* textures_directory_path, double animation_time, int damage) : AnimatedSprite(renderer, player, proj, textures_directory_path, animation_time, 0, 0, 0.5, 0), is_shooting(false), damage(damage) {
 	rendereable.dstrect.w = rendereable.srcrect.w * scale;
 	rendereable.dstrect.h = rendereable.srcrect.h * scale;
 	rendereable.dstrect.x = WINDOW_WIDTH / 2 - rendereable.dstrect.w / 2;
