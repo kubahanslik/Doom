@@ -62,7 +62,6 @@ void Player::update() {
 	if (!map.isInWall(pos_x, pos_y + dy * SIZE)) {
 		pos_y += dy;
 	}
-	std::cout << "(" << getTileX() << ", " << getTileY() << ")\n";
 }
 
 void Player::draw() {
